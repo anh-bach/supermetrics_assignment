@@ -1,0 +1,20 @@
+{
+  "files": {
+    "main.css": "/supermetrics_assignment/static/css/main.9b3cbf81.chunk.css",
+    "main.js": "/supermetrics_assignment/static/js/main.c47ef00c.chunk.js",
+    "main.js.map": "/supermetrics_assignment/static/js/main.c47ef00c.chunk.js.map",
+    "runtime-main.js": "/supermetrics_assignment/static/js/runtime-main.43dff18a.js",
+    "runtime-main.js.map": "/supermetrics_assignment/static/js/runtime-main.43dff18a.js.map",
+    "static/js/2.11672240.chunk.js": "/supermetrics_assignment/static/js/2.11672240.chunk.js",
+    "static/js/2.11672240.chunk.js.map": "/supermetrics_assignment/static/js/2.11672240.chunk.js.map",
+    "index.html": "/supermetrics_assignment/index.html",
+    "static/css/main.9b3cbf81.chunk.css.map": "/supermetrics_assignment/static/css/main.9b3cbf81.chunk.css.map",
+    "static/js/2.11672240.chunk.js.LICENSE.txt": "/supermetrics_assignment/static/js/2.11672240.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.43dff18a.js",
+    "static/js/2.11672240.chunk.js",
+    "static/css/main.9b3cbf81.chunk.css",
+    "static/js/main.c47ef00c.chunk.js"
+  ]
+}
