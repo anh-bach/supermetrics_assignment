@@ -1,51 +1,48 @@
 import React, { Fragment, useState, useEffect } from 'react';
+import { useParams, useNavigate } from 'react-router-dom';
 
 import { debounce } from '../utils/debounce';
 import { sortPostAscending } from '../utils/sort';
 
 const Sidebar = ({
   users = [],
-  currentUser,
-  setCurrentUser,
-  setPosts,
-  setSort,
   usersSearch,
+  setSort,
   setUsersSearch,
   setPostsSearch,
 }) => {
+  const { userId } = useParams();
+  const navigate = useNavigate();
   const [initUsers, setInitUsers] = useState([]);
 
   useEffect(() => {
-    //set all users at the beginning
+    //init users at the beginning
     setInitUsers(users);
   }, [users]);
 
   const handleClick = (user) => {
-    //set the current user
-    setCurrentUser(user);
-    //reset sorting
+    //navigate to personal user posts page
+    navigate(`/posts/${user.id}`);
+    //reset the sort
     setSort('ascending');
-    //reset user search input
-    setUsersSearch('');
-    //reset posts search input
-    setPostsSearch('');
-    //reset the total users to show all the users after one user gets clicked
+    //reset the sidebar
     setInitUsers(users);
-    //set the current user's posts with posts sorted ascending
-    setPosts(sortPostAscending(user.posts));
+    //reset the users search input
+    setUsersSearch('');
+    //reset the posts search input
+    setPostsSearch('');
   };
 
   const handleSearch = (e) => {
-    console.log('trigger search user');
     //control user search input
     const keyword = e.target.value.toLowerCase();
     setUsersSearch(keyword);
-    //reset total users
+    //reset all the users
     setInitUsers(users);
+    //filter users and render the result
     const filteredUsers = users.filter((user) =>
       user.name.toLowerCase().includes(keyword)
     );
-    //set the filtered users
     setInitUsers(filteredUsers);
   };
 
@@ -54,7 +51,7 @@ const Sidebar = ({
       <div className='sidebar__search'>
         <input
           value={usersSearch}
-          onChange={(e) => handleSearch(e)}
+          onChange={handleSearch}
           type='text'
           placeholder='Search user...'
         />
@@ -63,9 +60,7 @@ const Sidebar = ({
         {initUsers.map((user) => (
           <div
             key={user.id}
-            className={`row sidebar__item ${
-              currentUser && currentUser.id === user.id && 'active'
-            }`}
+            className={`row sidebar__item ${userId === user.id && 'active'}`}
             onClick={() => handleClick(user)}
           >
             <div className='col-8 sidebar__item--name'>{user.name}</div>

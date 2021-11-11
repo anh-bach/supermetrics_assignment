@@ -6,7 +6,6 @@ import { sortPostAscending, sortPostDescending } from '../utils/sort';
 
 const PostList = ({
   posts = [],
-  setPosts,
   sort,
   setSort,
   postsSearch,
