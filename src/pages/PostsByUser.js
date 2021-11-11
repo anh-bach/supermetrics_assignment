@@ -1,13 +1,11 @@
 import React, { useState, useEffect, Fragment } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 
 import Sidebar from '../components/Sidebar';
 import PostList from '../components/PostList';
-import { getPosts } from '../actions/post';
 import { Link } from 'react-router-dom';
 import { sortPostAscending } from '../utils/sort';
-import { LOGGED_IN_USER } from '../actions/types';
 
 const PostsByUser = () => {
   const { userId } = useParams();
@@ -29,7 +27,8 @@ const PostsByUser = () => {
       (creator) => creator.id === userId
     );
     if (currentCreator) {
-      setPosts(currentCreator.posts);
+      //set the posts of the current creators - ascendingly created_time sorted
+      setPosts(sortPostAscending(currentCreator.posts));
     }
   }, [userId]);
 
@@ -45,27 +44,39 @@ const PostsByUser = () => {
       </div>
       <h1>This is the posts page</h1>
       <div className='row'>
-        <Fragment>
-          <div className='col-4'>
-            <Sidebar
-              users={users}
-              usersSearch={usersSearch}
-              setSort={setSort}
-              setUsersSearch={setUsersSearch}
-              setPostsSearch={setPostsSearch}
-            />
-          </div>
+        {posts.length > 0 ? (
+          <Fragment>
+            <div className='col-4'>
+              <Sidebar
+                users={users}
+                usersSearch={usersSearch}
+                setSort={setSort}
+                setUsersSearch={setUsersSearch}
+                setPostsSearch={setPostsSearch}
+              />
+            </div>
 
-          <div className='col-8'>
-            <PostList
-              posts={posts}
-              sort={sort}
-              setSort={setSort}
-              postsSearch={postsSearch}
-              setPostsSearch={setPostsSearch}
-            />
+            <div className='col-8'>
+              <PostList
+                posts={posts}
+                sort={sort}
+                setSort={setSort}
+                postsSearch={postsSearch}
+                setPostsSearch={setPostsSearch}
+              />
+            </div>
+          </Fragment>
+        ) : (
+          <div>
+            <p>
+              There is no post to show yet or your token is expired. Please
+              Login again to continue to use the App.
+            </p>
+            <Link className='btn' to='/login'>
+              Login
+            </Link>
           </div>
-        </Fragment>
+        )}
       </div>
     </div>
   );

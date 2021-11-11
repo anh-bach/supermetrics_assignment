@@ -39,11 +39,6 @@ const Login = () => {
 
       //save user token in redux store
       dispatch({ type: LOGGED_IN_USER, payload: { client_id, sl_token } });
-      //save user token in localStorage - not good solution
-      localStorage.setItem(
-        'supermetrics_user',
-        JSON.stringify({ client_id, sl_token })
-      );
       //load posts from server
       const postsRes = await getPosts(sl_token);
       const rawPosts = postsRes.data.data.posts;

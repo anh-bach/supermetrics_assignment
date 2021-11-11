@@ -1,9 +1,6 @@
 import React, { Fragment, useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 
-import { debounce } from '../utils/debounce';
-import { sortPostAscending } from '../utils/sort';
-
 const Sidebar = ({
   users = [],
   usersSearch,

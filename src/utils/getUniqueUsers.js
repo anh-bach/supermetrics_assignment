@@ -1,5 +1,3 @@
-import { sortPostAscending } from './sort';
-
 export const getUniqueUsers = (posts) => {
   //process the results to get unique users
   const uniqueUsersObj = {};
@@ -24,10 +22,6 @@ export const getUniqueUsers = (posts) => {
   //sort users according to name alphabetically
   const sortedUniqueUsers = uniqueUsers.sort((userOne, userTwo) =>
     userOne.name.localeCompare(userTwo.name)
-  );
-  //sort user's posts according to date ascendingly
-  sortedUniqueUsers.forEach(
-    (user) => (user.posts = sortPostAscending(user.posts))
   );
 
   return sortedUniqueUsers;

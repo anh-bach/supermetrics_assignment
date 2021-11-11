@@ -1,7 +1,6 @@
 import React, { Fragment, useEffect, useState } from 'react';
 
 import Post from './Post';
-import { debounce } from '../utils/debounce';
 import { sortPostAscending, sortPostDescending } from '../utils/sort';
 
 const PostList = ({
