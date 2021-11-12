@@ -11,6 +11,7 @@ const Sidebar = ({
   const { userId } = useParams();
   const navigate = useNavigate();
   const [initUsers, setInitUsers] = useState([]);
+  const [timer, setTimer] = useState(undefined);
 
   useEffect(() => {
     //init users at the beginning
@@ -34,13 +35,19 @@ const Sidebar = ({
     //control user search input
     const keyword = e.target.value.toLowerCase();
     setUsersSearch(keyword);
-    //reset all the users
-    setInitUsers(users);
-    //filter users and render the result
-    const filteredUsers = users.filter((user) =>
-      user.name.toLowerCase().includes(keyword)
+    //only trigger the search if the client stop typing in 500ms
+    clearTimeout(timer);
+    setTimer(
+      setTimeout(() => {
+        //reset all the users
+        setInitUsers(users);
+        //filter users and render the result
+        const filteredUsers = users.filter((user) =>
+          user.name.toLowerCase().includes(keyword)
+        );
+        setInitUsers(filteredUsers);
+      }, 500)
     );
-    setInitUsers(filteredUsers);
   };
 
   return (

@@ -11,6 +11,7 @@ const PostList = ({
   setPostsSearch,
 }) => {
   const [initPosts, setInitPosts] = useState([]);
+  const [timer, setTimer] = useState(undefined);
 
   useEffect(() => {
     if (sort === 'ascending') {
@@ -33,14 +34,19 @@ const PostList = ({
     const keyword = e.target.value.toLowerCase();
     setPostsSearch(keyword);
 
-    console.log('trigger search posts');
-    //reset all the posts
-    setInitPosts(posts);
-    const filteredPosts = posts.filter((post) =>
-      post.message.toLowerCase().includes(keyword)
+    //trigger the search only after the user stop typing in 500ms
+    clearTimeout(timer);
+    setTimer(
+      setTimeout(() => {
+        //reset all the posts
+        setInitPosts(posts);
+        const filteredPosts = posts.filter((post) =>
+          post.message.toLowerCase().includes(keyword)
+        );
+        //set the filtered posts to render after search
+        setInitPosts(filteredPosts);
+      }, 500)
     );
-    //set the filtered posts to render after search
-    setInitPosts(filteredPosts);
   };
 
   return (
