@@ -28,7 +28,7 @@ Thank you for coming and enjoy using the app. :)
 
 ## Deploy
 
-This small app is deployed on Heroku. Please check it out [here](https://iamanh1990.github.io/supermetrics_assignment/).
+This small app is deployed on GitHub. Please check it out [here](https://iamanh1990.github.io/supermetrics_assignment/).
 
 ## Cloning the App.
 
